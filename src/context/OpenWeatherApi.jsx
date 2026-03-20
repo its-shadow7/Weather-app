@@ -21,7 +21,7 @@ function OpenWeatherApi({ children }) {
     localStorage.setItem('recentCities', JSON.stringify(recentCities));
   }, [recentCities]);
 
-  // Always fetch Metric data as our "Source of Truth"
+  //fetch Metric data 
   async function getWeatherData(city) {
     setLoading(true);
     setError("");
@@ -31,7 +31,7 @@ function OpenWeatherApi({ children }) {
         params: {
           q: city,
           appid: API_KEY,
-          units: 'metric' // Hardcoded to metric
+          units: 'metric' // default unit is metric
         }
       });
 
@@ -58,8 +58,7 @@ function OpenWeatherApi({ children }) {
   };
 
   useEffect(() => {
-    getWeatherData("Bangalore"); // default city 
-   
+    getWeatherData(recentCities.length != 0?recentCities[0]:"Bangalore"); // default city Banglore
   }, []); 
 
   return (
